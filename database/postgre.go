@@ -1,7 +1,6 @@
 package database
 
 import (
-	"MyGarm/helpers"
 	"MyGarm/models"
 	"fmt"
 	"gorm.io/driver/postgres"
@@ -16,7 +15,6 @@ var (
 )
 
 func StartDB() {
-	helpers.LoadENV()
 	var (
 		host     = os.Getenv("PGHOST")
 		port     = os.Getenv("PGPORT")
