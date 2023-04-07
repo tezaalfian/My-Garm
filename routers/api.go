@@ -2,7 +2,6 @@ package routers
 
 import (
 	"MyGarm/controllers"
-	_ "MyGarm/docs"
 	"MyGarm/middlewares"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
