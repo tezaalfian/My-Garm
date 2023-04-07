@@ -42,7 +42,7 @@ func UpdatePhoto(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	Photo := models.Photo{}
 
-	PhotoId, _ := strconv.Atoi(c.Param("PhotoId"))
+	PhotoId, _ := strconv.Atoi(c.Param("photoId"))
 	userID := uint(userData["id"].(float64))
 
 	if contentType == appJSON {
@@ -70,7 +70,7 @@ func DeletePhoto(c *gin.Context) {
 	db := database.GetDB()
 	Photo := models.Photo{}
 
-	PhotoId, _ := strconv.Atoi(c.Param("PhotoId"))
+	PhotoId, _ := strconv.Atoi(c.Param("photoId"))
 	Photo.ID = uint(PhotoId)
 
 	err := db.Debug().Delete(&Photo).Error
@@ -90,7 +90,7 @@ func GetPhoto(c *gin.Context) {
 	db := database.GetDB()
 	Photo := models.Photo{}
 
-	PhotoId, _ := strconv.Atoi(c.Param("PhotoId"))
+	PhotoId, _ := strconv.Atoi(c.Param("photoId"))
 	Photo.ID = uint(PhotoId)
 
 	err := db.Debug().Where("id = ?", PhotoId).Take(&Photo).Error

@@ -42,7 +42,7 @@ func UpdateComment(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	Comment := models.Comment{}
 
-	CommentId, _ := strconv.Atoi(c.Param("CommentId"))
+	CommentId, _ := strconv.Atoi(c.Param("commentId"))
 	userID := uint(userData["id"].(float64))
 
 	if contentType == appJSON {
@@ -70,7 +70,7 @@ func DeleteComment(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}
 
-	CommentId, _ := strconv.Atoi(c.Param("CommentId"))
+	CommentId, _ := strconv.Atoi(c.Param("commentId"))
 	Comment.ID = uint(CommentId)
 
 	err := db.Debug().Delete(&Comment).Error
@@ -90,7 +90,7 @@ func GetComment(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}
 
-	CommentId, _ := strconv.Atoi(c.Param("CommentId"))
+	CommentId, _ := strconv.Atoi(c.Param("commentId"))
 	Comment.ID = uint(CommentId)
 
 	err := db.Debug().Where("id = ?", CommentId).Take(&Comment).Error
