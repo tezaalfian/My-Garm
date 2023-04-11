@@ -4,6 +4,7 @@ import (
 	"MyGarm/database"
 	"MyGarm/helpers"
 	"MyGarm/models"
+	"MyGarm/services"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"net/http"
@@ -25,6 +26,22 @@ func CreatePhoto(c *gin.Context) {
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
 
+	photoFile, _, err := c.Request.FormFile("photo")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad request",
+			"message": err.Error(),
+		})
+		return
+	}
+	uploadUrl, err := services.NewMediaUpload().FileUpload(models.File{File: photoFile})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad request",
+			"message": err.Error(),
+		})
+		return
+	}
 	Photo := models.Photo{}
 	userID := uint(userData["id"].(float64))
 
@@ -35,11 +52,12 @@ func CreatePhoto(c *gin.Context) {
 	}
 
 	Photo.UserID = userID
-	err := db.Debug().Create(&Photo).Error
-	if err != nil {
+	Photo.PhotoUrl = uploadUrl
+	errCreate := db.Debug().Create(&Photo).Error
+	if errCreate != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad request",
-			"message": err.Error(),
+			"message": errCreate.Error(),
 		})
 		return
 	}
@@ -61,6 +79,22 @@ func UpdatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
+	photoFile, _, err := c.Request.FormFile("photo")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad request",
+			"message": err.Error(),
+		})
+		return
+	}
+	uploadUrl, err := services.NewMediaUpload().FileUpload(models.File{File: photoFile})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad request",
+			"message": err.Error(),
+		})
+		return
+	}
 	Photo := models.Photo{}
 
 	PhotoId, _ := strconv.Atoi(c.Param("photoId"))
@@ -75,12 +109,12 @@ func UpdatePhoto(c *gin.Context) {
 	Photo.UserID = userID
 	Photo.ID = uint(PhotoId)
 
-	err := db.Model(&Photo).Where("id = ?", PhotoId).Updates(models.Photo{Title: Photo.Title, PhotoUrl: Photo.PhotoUrl, Caption: Photo.Caption}).Error
+	errUpdate := db.Model(&Photo).Where("id = ?", PhotoId).Updates(models.Photo{Title: Photo.Title, PhotoUrl: uploadUrl, Caption: Photo.Caption}).Error
 
-	if err != nil {
+	if errUpdate != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad request",
-			"message": err.Error(),
+			"message": errUpdate.Error(),
 		})
 		return
 	}
