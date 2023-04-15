@@ -2,22 +2,23 @@ package routers
 
 import (
 	"MyGarm/controllers"
+	_ "MyGarm/docs"
 	"MyGarm/middlewares"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title My Garm API
-// @description This is a sample server for a book store.
-// @version 1.0.0
-// @termsOfService http://swagger.io/terms/
-// @contact.name API Support
-// @contact.url http://www.swagger.io/support
-// @contact.email
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:8080
+// @Title My Garm API
+// @Description This is a sample server for a book store.
+// @Version 1.0.0
+// @TermsOfService http://swagger.io/terms/
+// @Contact.name API Support
+// @Contact.url http://www.swagger.io/support
+// @Contact.email
+// @License.name Apache 2.0
+// @License.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @Host localhost:8080
 // @BasePath /
 func StartApp() *gin.Engine {
 	r := gin.Default()
