@@ -14,6 +14,7 @@ import (
 // @Summary create a new photo
 // @Description create a new photo
 // @Tags photos
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param photo body models.Photo true "Photo object"
@@ -50,6 +51,7 @@ func CreatePhoto(c *gin.Context) {
 // @Summary updates a photo
 // @Description updates a photo
 // @Tags photos
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "Photo ID"
@@ -91,6 +93,7 @@ func UpdatePhoto(c *gin.Context) {
 // @Summary deletes a photo
 // @Description deletes a photo
 // @Tags photos
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "Photo ID"
@@ -121,6 +124,7 @@ func DeletePhoto(c *gin.Context) {
 // @Summary gets a photo
 // @Description gets a photo
 // @Tags photos
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "Photo ID"
@@ -149,6 +153,7 @@ func GetPhoto(c *gin.Context) {
 // @Summary gets all photos
 // @Description gets all photos
 // @Tags photos
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} []models.Photo

@@ -14,6 +14,7 @@ import (
 // @Summary creates a new social media
 // @Description creates a new social media
 // @Tags socialMedia
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param socialMedia body models.SocialMedia true "SocialMedia object"
@@ -50,6 +51,7 @@ func CreateSocialMedia(c *gin.Context) {
 // @Summary updates a social media
 // @Description updates a social media
 // @Tags socialMedia
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param socialMediaId path int true "SocialMedia ID"
@@ -91,6 +93,7 @@ func UpdateSocialMedia(c *gin.Context) {
 // @Summary deletes a social media
 // @Description deletes a social media
 // @Tags socialMedia
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param socialMediaId path int true "SocialMedia ID"
@@ -121,6 +124,7 @@ func DeleteSocialMedia(c *gin.Context) {
 // @Summary gets a social media
 // @Description gets a social media
 // @Tags socialMedia
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param socialMediaId path int true "SocialMedia ID"
@@ -149,6 +153,7 @@ func GetSocialMedia(c *gin.Context) {
 // @Summary gets all social media
 // @Description gets all social media
 // @Tags socialMedia
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} []models.SocialMedia

@@ -14,6 +14,7 @@ import (
 // @Summary creates a new comment
 // @Description creates a new comment
 // @Tags comments
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param comment body models.Comment true "Comment object"
@@ -50,6 +51,7 @@ func CreateComment(c *gin.Context) {
 // @Summary updates a comment
 // @Description updates a comment
 // @Tags comments
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param commentId path int true "Comment ID"
@@ -91,6 +93,7 @@ func UpdateComment(c *gin.Context) {
 // @Summary deletes a comment
 // @Description deletes a comment
 // @Tags comments
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param commentId path int true "Comment ID"
@@ -121,6 +124,7 @@ func DeleteComment(c *gin.Context) {
 // @Summary gets a comment
 // @Description gets a comment
 // @Tags comments
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Param commentId path int true "Comment ID"
@@ -149,6 +153,7 @@ func GetComment(c *gin.Context) {
 // @Summary gets all comments
 // @Description gets all comments
 // @Tags comments
+// @Param Authorization header string true "Bearer Token"
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} []models.Comment
